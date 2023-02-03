@@ -8,7 +8,11 @@ Sample report is build using Power BI but any reporting tool can be utilized to 
 Contents -
 
 Python Script - IICS_CDQ_Dashboard_Dataset.py
-
 Sample Power BI Report - CDQ_Report.pbix
-
 Sample CSV files (used to build the sample Power BI Report) - Sample CSV Files
+
+
+Informatica IICS prerequisites -
+
+User must have access to all the profiles in the IICS org
+Profiles must have executed at least once
