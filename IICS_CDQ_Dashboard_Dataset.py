@@ -10,7 +10,7 @@ import datetime
 import shutil
 import glob
 
-
+# In case you want to login through Security Assertion Markup Language (SAML) token, please refer this article - https://docs.informatica.com/integration-cloud/cloud-data-integration/current-version/rest-api-reference/platform-rest-api-version-2-resources/loginsaml.html
 # Set IICS Credentials & Output file name Variables here
 POD_region = ""
 username = ""
@@ -194,7 +194,7 @@ def get_latest_run_key_and_metadata(in_profile_id) :
                  })
                 df = pd.DataFrame(array_dict,index=[0])
                 Profile_Metadata_Details_outfile = open(Profile_Metadata_Details, 'a');
-                df.to_csv(Profile_Metadata_Details_outfile, index=False, header=(i_runkey_metadata==0),line_terminator='\n')
+                df.to_csv(Profile_Metadata_Details_outfile, index=False, header=(i_runkey_metadata==0),lineterminator='\n')
                 Profile_Metadata_Details_outfile.close()
                 i_runkey_metadata += 1
             
@@ -211,7 +211,7 @@ def get_latest_run_key_and_metadata(in_profile_id) :
                  }
                 df = pd.DataFrame(array_dict_1,index=[0])
                 Profile_rule_output_fields_outfile = open(Profile_rule_output_fields, 'a');
-                df.to_csv(Profile_rule_output_fields_outfile, index=False, header=(i_runkey_outfield==0),line_terminator='\n')
+                df.to_csv(Profile_rule_output_fields_outfile, index=False, header=(i_runkey_outfield==0),lineterminator='\n')
                 Profile_rule_output_fields_outfile.close()
                 i_runkey_outfield += 1
                 
@@ -233,7 +233,7 @@ def get_latest_run_key_and_metadata(in_profile_id) :
              })
             df = pd.DataFrame(array_dict,index=[0])
             Profile_Metadata_Details_outfile1 = open(Profile_Metadata_Details, 'a');
-            df.to_csv(Profile_Metadata_Details_outfile1, index=False, header=(i_runkey_metadata==0),line_terminator='\n')
+            df.to_csv(Profile_Metadata_Details_outfile1, index=False, header=(i_runkey_metadata==0),lineterminator='\n')
             Profile_Metadata_Details_outfile1.close()
             i_runkey_metadata += 1
     return response["lastRunKey"]
@@ -257,12 +257,12 @@ def get_column_profiling_result (in_profile_id, in_profile_name, in_run_key, in_
     # Write only for Table columns, not for Rules (Rule information will be captured in Top N value frequency)
     df_DATASOURCEFIELD = df[df['columnType'] == "DATASOURCEFIELD"]
     in_file_name_outfile = open(in_file_name, 'a');
-    df_DATASOURCEFIELD.to_csv(in_file_name_outfile, index=False, mode='a', header=(in_i==0),line_terminator='\n')
+    df_DATASOURCEFIELD.to_csv(in_file_name_outfile, index=False, mode='a', header=(in_i==0),lineterminator='\n')
     in_file_name_outfile.close()
     df_MAPPLETFIELD = df[df['columnType'] == "MAPPLETFIELD"]
     in_file_name_new = in_file_name + "_temp"
     in_file_name_new_outfile = open(in_file_name_new, 'a');
-    df_MAPPLETFIELD.to_csv(in_file_name_new_outfile, index=False, mode='a', header=(in_i==0), columns=['Record_Type','Profile_id','Profile_name','columnId','columnName','runKey'],line_terminator='\n')
+    df_MAPPLETFIELD.to_csv(in_file_name_new_outfile, index=False, mode='a', header=(in_i==0), columns=['Record_Type','Profile_id','Profile_name','columnId','columnName','runKey'],lineterminator='\n')
     in_file_name_new_outfile.close()
 # Function to get column profiling result - as seen on profiling page - END
 
@@ -289,7 +289,7 @@ def get_top_n_value_frequency (in_Record_Type,in_profile_id, in_profile_name, in
     df.insert(7, 'Profile_Run_Key', in_runkey)
     # Write only for Table columns, not for Rules (Rule information will be captured in Top N value frequency)
     in_file_name1_outfile = open(in_file_name, 'a');
-    df.to_csv(in_file_name1_outfile, index=False, mode='a', header=(in_i==0),line_terminator='\n')
+    df.to_csv(in_file_name1_outfile, index=False, mode='a', header=(in_i==0),lineterminator='\n')
     in_file_name1_outfile.close()
 # Function to Get Top N value frequencies by column id - END
 
@@ -326,7 +326,7 @@ def get_profile_execution_stats(in_profile_id,in_profile_name,in_run_key,in_i,in
         }
     df = pd.DataFrame(array_dict,index=[0])
     in_file_name2_outfile = open(in_file_name, 'a');
-    df.to_csv(in_file_name2_outfile, index=False, mode='a', header=(in_i==0),line_terminator='\n')
+    df.to_csv(in_file_name2_outfile, index=False, mode='a', header=(in_i==0),lineterminator='\n')
     in_file_name2_outfile.close()
     #print(df)
 # Function to capture profile execution stats - End
@@ -342,8 +342,8 @@ for profile_id_out in get_profile_list():
     # Capture Latest run key with Metadata details for each profile in a CSV file
     print('Capturing Latest run key with Metadata details for each profile in a CSV file...')
     latest_run_key = get_latest_run_key_and_metadata(profile_id_out['id'])
-    i_runkey_metadata += 1
-    i_runkey_outfield += 1
+    #i_runkey_metadata += 1
+    #i_runkey_outfield += 1
     
     # Capture Colume Profiling Result Data for each profile in a CSV file - Upto Last 10 runs
     print('Capturing Colume Profiling Result Data for each profile in a CSV file - Upto Last 10 runs')
@@ -375,4 +375,3 @@ for ind in df.index:
 print('Deleting temporary files')
 # Delete temporary files
 os.remove(temp_file_name)
-
