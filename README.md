@@ -21,3 +21,7 @@ Informatica IICS prerequisites -
 User must have access to all the profiles in the IICS org
 
 Profiles must have executed at least once
+
+
+
+Note - This Python script is tested with Python 3.11.1
