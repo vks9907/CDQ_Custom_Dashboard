@@ -403,7 +403,7 @@ for ind in df.index:
         # Increment variable for skipping header for second record onwards
         i_val_freq += 1
     except Exception as e5:
-        logger.exception('Exception captured while calling function get_top_n_value_frequency() while processing profile '+df['Profile_id'][ind]+' - '+df['Profile_name'][ind]+'. '+ str(e5))
+        logging.exception('Exception captured while calling function get_top_n_value_frequency() while processing profile '+df['Profile_id'][ind]+' - '+df['Profile_name'][ind]+'. '+ str(e5))
         continue
 
 print('Deleting temporary files')
